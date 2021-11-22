@@ -1,8 +1,12 @@
-package model;
+package maze;
 
-import java.util.Random;
+import java.io.Serializable;
 
-public class Door {
+import database.Question;
+
+public class Door implements Serializable{
+
+	private static final long serialVersionUID = -1629390207231169623L;
 
 	private boolean myDoorLocked = false;
     
@@ -11,10 +15,7 @@ public class Door {
     private boolean myWall;
     
     public Door() {
-    	DataBase db = new DataBase();
-    	Random rand = new Random();
-    	int r = rand.nextInt(db.getRowCount()) + 1;
-    	myQuestion = new Question(r);
+    	myQuestion = new Question();
     }
     
     public void unLockDoor() {
@@ -31,6 +32,10 @@ public class Door {
     
     public boolean getWall() {
         return myWall;
+    }
+    
+    public void setWall(boolean theWall) {
+    	myWall = theWall;
     }
 	
     @Override 
