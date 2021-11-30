@@ -34,20 +34,9 @@ public class Question implements Serializable{
 	    return myHint;
 	}
 	
-	public boolean checkAnswer(String theAns) {
-		boolean result = false;
-		if(theAns.equals(myAnswer)) {
-			result = true;
-		}
-		return result;
-	}
-	
 	public String toString() {
 	    StringBuilder sb = new StringBuilder();
-	    
-	    sb.append("Question: " + myQuestion + "/n");
-	    sb.append("Answer: " + myAnswer + "/n");
-	    
+	    sb.append("\n" + myQuestion + "\n");
 	    return sb.toString();
     }
 

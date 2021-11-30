@@ -1,4 +1,4 @@
-package model;
+package database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,10 +10,6 @@ import org.sqlite.SQLiteDataSource;
 public class DataBase {
 	
 	SQLiteDataSource ds;
-	
-	Connection conn;
-	
-    Statement stmt;
     
 	public DataBase() {
 		try {
@@ -28,12 +24,12 @@ public class DataBase {
 	public String getQuestion(int theRandomNum) {
 		String question = "";
 		try {
-			conn = ds.getConnection();
-            stmt = conn.createStatement();
-            String query = "SELECT QUESTION FROM questions where ROW_NUM =" + theRandomNum;
+			Connection conn = ds.getConnection();
+			Statement stmt = conn.createStatement();
+            String query = "SELECT * FROM questions where ROW_NUM =" + theRandomNum;
             ResultSet rs = stmt.executeQuery(query);
             
-            question = rs.getString( "QUESTION" );
+            question = rs.getString( "QUESTIONS" );
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -45,9 +41,9 @@ public class DataBase {
     public String getAnswer(int theRandomNum) {
     	String answer = "";
         try {
-        	conn = ds.getConnection();
-            stmt = conn.createStatement();
-            String query = "SELECT ANSWER FROM questions where ROW_NUM =" + theRandomNum;
+        	Connection conn = ds.getConnection();
+        	Statement stmt = conn.createStatement();
+            String query = "SELECT * FROM questions where ROW_NUM =" + theRandomNum;
             ResultSet rs = stmt.executeQuery(query);
             
             answer = rs.getString( "ANSWER" );
@@ -62,8 +58,8 @@ public class DataBase {
     public String getHint(int theRandomNum) {
     	String hint = "";
         try {
-        	conn = ds.getConnection();
-            stmt = conn.createStatement();
+        	Connection conn = ds.getConnection();
+        	Statement stmt = conn.createStatement();
             String query = "SELECT HINT FROM questions where ROW_NUM =" + theRandomNum;
             ResultSet rs = stmt.executeQuery(query);
             
@@ -79,11 +75,11 @@ public class DataBase {
     public int getRowCount() {
     	int count = 0;
     	try {
-        	conn = ds.getConnection();
-            stmt = conn.createStatement();
-            String query = "SELECT COUNT(*) FROM questions";
+    		Connection conn = ds.getConnection();
+        	Statement stmt = conn.createStatement();
+            String query = "SELECT COUNT(*) as count FROM questions";
             ResultSet rs = stmt.executeQuery(query);
-			count = rs.getInt( "ROW_NUM" );
+			count = rs.getInt( "count" );
             
 		}catch(SQLException e) {
 			e.printStackTrace();

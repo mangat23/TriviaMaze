@@ -5,21 +5,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Scanner;
 
 import maze.Maze;
 
 public class Game {
 	
 	private Maze myMaze;
-	private Scanner myScanner = new Scanner(System.in);
 	
 	public Game() {
-		MenuOptions.printGameIntro();
+		MenuUtilities.printGameIntro();
 	}
 	
 	public void run() {
-    	String homeSelection = MenuOptions.printHomeMenu();
+    	String homeSelection = MenuUtilities.printHomeMenu();
     	
     	if(homeSelection.equals("1")) {
     		myMaze = new Maze();
@@ -27,53 +25,56 @@ public class Game {
     	}
     	if(homeSelection.equals("2")) {
     		loadGame();
+    		playGame();
     	}
     	if(homeSelection.equals("3")) {
-    		MenuOptions.printHelpMenu();
+    		MenuUtilities.printHelpMenu();
     		run();
     	}
     	if(homeSelection.equals("4")) {
-    		MenuOptions.printGameOutro();
+    		MenuUtilities.printGameOutro();
     	}
 	}
 	
 	public void playGame() {
 		while(!myMaze.isGameOver() || myMaze.isGameWon()) {
-			String choice = MenuOptions.printMenu2();
+			String choice = MenuUtilities.printMenu2();
 			if(choice.equals("1")) {
-				String moveChoice = MenuOptions.printMoveMenu();
+				//move
+				myMaze.displayChoices();
+				String moveChoice = MenuUtilities.printMoveMenu();
 				myMaze.move(moveChoice);
 			}
 			if(choice.equals("2")) {
+				//save game
 				saveGame();
-				MenuOptions.printGameOutro();
+				MenuUtilities.printGameOutro();
 			}
 			if(choice.equals("3")) {
-				MenuOptions.printGameOutro();
+				//quit
+				MenuUtilities.printGameOutro();
+				break;
 			}
 			if(choice.equals("4")) {
+				//cheats
 				getCheat();
 			}
 		}
 		if(myMaze.isGameWon()) {
-			MenuOptions.printGameWon();
+			MenuUtilities.printGameWon();
+		}
+		if(myMaze.isGameOver()) {
+			MenuUtilities.printGameOver();
 		}
 	}
 	
+	//enable cheats and keep track of scores?
 	 public void getCheat() {
-			String input = myScanner.next();
-	    	System.out.println("All you need is faith trust and...");
-	    	if(input.equals("pixie dust")) {
-	    		System.out.println("CHEAT MODE ENABLED");
-	    		String cheat = myScanner.next();
-	    		if(cheat.equals("TAKEmeTOtheEND")) {
-	    			myMaze.setLocation(2,2);
-	    		}
-	    		else {
-	    			System.out.print("EXITING CHEAT MODE...");
-	    		}
-	    	}
-	    }
+	     String cheat = MenuUtilities.isCheat();
+	     if(cheat.equals("TAKEmeTOtheEND")) {
+	    	 myMaze.setLocation(2,2);
+	     }
+	  }
 	
 	public void loadGame() {
         try {

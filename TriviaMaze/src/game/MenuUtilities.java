@@ -2,9 +2,14 @@ package game;
 
 import java.util.*;
 
-public class MenuOptions{
+public class MenuUtilities{
 	
     private static Scanner myScanner = new Scanner(System.in);
+    
+    public static void main(String [] args) {
+    	Game game = new Game();
+    	game.run();
+    }
     
     public static String printHomeMenu() {
         System.out.println("1-New Game");
@@ -22,6 +27,7 @@ public class MenuOptions{
     }
     
     public static String printMenu2() {
+    	System.out.println();
     	System.out.println("What would you like to do?");
     	System.out.println("1-Move");
         System.out.println("2-Save Game");
@@ -39,10 +45,7 @@ public class MenuOptions{
     public static String printMoveMenu() {
     	System.out.println("Which room do you want to proceed to? Enter north, south, east or"
     			+ " west.");
-    	System.out.println("Move North");
-        System.out.println("Move South");
-        System.out.println("Move West");
-        System.out.println("Move East\n");
+        System.out.println();
         
         String[] options = new String[]{"north", "south", "east", "west"};
         String choice = myScanner.next().toLowerCase();
@@ -51,6 +54,27 @@ public class MenuOptions{
     		choice = myScanner.next().toLowerCase();
         }
     	return choice;
+    }
+    
+    public static String isCheat() {
+    	String cheat = "";
+	    System.out.println("All you need is faith trust and...");
+	    String input = myScanner.next();
+	    if(input.equals("pixieDust")) {
+	        System.out.println("CHEAT MODE ENABLED");
+	    	input = myScanner.next();
+	    	if(input.equals("TAKEmeTOtheEND")) {
+	    		System.out.print("Hold tight while we take you there...");
+	    	    cheat = "TAKEmeTOtheEND";
+	    	}
+	    	else {
+	    		System.out.print("EXITING CHEAT MODE...");
+	    	}
+	    }
+	    else {
+    		System.out.print("EXITING CHEAT MODE...");
+    	}
+	    return cheat;
     }
     
     public static void printHelpMenu() {
@@ -70,6 +94,7 @@ public class MenuOptions{
     }
     
     public static void printGameIntro() {
+    	System.out.println();
     	System.out.println("                ,n888888n,");
 	    System.out.println("               .8888888888b");
 	    System.out.println("               888888888888nd8P~''8g,");
@@ -102,6 +127,7 @@ public class MenuOptions{
     }
     
     public static void printHelpMenuIntro() {
+    	System.out.println();
     	System.out.println("                ,n888888n,");
 	    System.out.println("               .8888888888b");
 	    System.out.println("               888888888888nd8P~''8g,");
@@ -134,6 +160,7 @@ public class MenuOptions{
     }
     
     public static void printGameOutro() {
+    	System.out.println();
     	System.out.println("                ,n888888n,");
 	    System.out.println("               .8888888888b");
 	    System.out.println("               888888888888nd8P~''8g,");
@@ -165,7 +192,41 @@ public class MenuOptions{
 	   	System.out.println("                   ~~\"~             ~~~\n");
     }
     
+    public static void printGameOver() {
+    	System.out.println();
+    	System.out.println("                ,n888888n,");
+	    System.out.println("               .8888888888b");
+	    System.out.println("               888888888888nd8P~''8g,");
+	    System.out.println("               88888888888888   _  `'~\\.  .n.");
+	    System.out.println("               `Y888888888888. / _  |~\\ (8\"8b");
+	    System.out.println("              ,nnn.. 8888888b.  |  \\ \\m\\|8888P");
+	    System.out.println("            ,d8888888888888888b. \\8b|.\\P~ ~P8~");
+	   	System.out.println("            888888888888888P~~_~  `8B_|      |");
+	   	System.out.println("            ~888888888~'8'   d8.    ~      _/");
+	   	System.out.println("             ~Y8888P'   ~\\ | |~|~b,__ __--~");
+	   	System.out.println("         --~~\\   ,d8888888b.\\`\\_/ __/~");
+	   	System.out.println("              \\_ d88888888888b\\_-~8888888bn.");
+	   	System.out.println("                \\8888P   \"Y888888888888\"888888bn.");
+	   	System.out.println("            /~'\\_\"__)      \"d88888888P,-~~-~888");
+	   	System.out.println("           /  / )   ~\\     ,888888/~' /  / / 8'");
+	   	System.out.println("        .-(  / / / |) )-----------(/ ~  / /  |---.");
+	   	System.out.println(" ______ | (   '    /_/ Disney Trivia(__/     /   |_______");
+	   	System.out.println(" \\      |   (_(_ ( /~      Maze      \\___/_/'    |      /");
+	   	System.out.println("  \\     |       Better luck next time pal.       |     /");
+	   	System.out.println("  /     (________________________________________)     \\");
+	   	System.out.println(" /__________)     __--|~mb  ,g8888b.         (__________\\");
+	   	System.out.println("               _/    8888b(.8P\"~'~---__");
+	   	System.out.println("              /       ~~~| / ,/~~~~--, `\\");
+	   	System.out.println("             (       ~\\,_) (/         ~-_`\\\\");
+	    System.out.println("              \\  -__---~._ \\             ~\\\\");
+	   	System.out.println("              (           )\\\\              ))\\");
+	   	System.out.println("              `\\          )  \"-_           `|\\");
+	 	System.out.println("                \\__    __/      ~-__   __--~\\\\");
+	   	System.out.println("                   ~~\"~             ~~~\n");
+    }
+    
     public static void printGameWon() {
+    	System.out.println();
     	System.out.println("                ,n888888n,");
 	    System.out.println("               .8888888888b");
 	    System.out.println("               888888888888nd8P~''8g,");

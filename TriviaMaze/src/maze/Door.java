@@ -1,33 +1,48 @@
 package maze;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 import database.Question;
 
 public class Door implements Serializable{
 
 	private static final long serialVersionUID = -1629390207231169623L;
-
-	private boolean myDoorLocked = false;
-    
-    private Question myQuestion;
+	
+	private Question myQuestion;
+	
+	private boolean myDoorLocked;
+	
+	private boolean myQuestionAnswered;
     
     private boolean myWall;
     
+    private Scanner myScan = new Scanner(System.in);
+    
     public Door() {
     	myQuestion = new Question();
-    }
-    
-    public void unLockDoor() {
-        myDoorLocked = true;
+    	myDoorLocked = false;
+    	myQuestionAnswered = false;
     }
     
     public Question getQuestion() {
         return myQuestion;
     }
     
-    public boolean isDoorLocked() {
+    public boolean getDoorLocked() {
         return myDoorLocked;
+    }
+    
+    public void setDoorlocked(boolean theValue) {
+        myDoorLocked = theValue;
+    }
+    
+    public boolean getQuestionAnswered() {
+        return myQuestionAnswered;
+    }
+    
+    public void setAnswerQuestion(boolean theValue) {
+    	myQuestionAnswered = theValue;
     }
     
     public boolean getWall() {
@@ -36,6 +51,14 @@ public class Door implements Serializable{
     
     public void setWall(boolean theWall) {
     	myWall = theWall;
+    }
+    
+    public boolean answerDoorQuestion() {
+    	boolean result = false;
+    	if(myQuestion.getAnswer().equals(myScan.nextLine().toLowerCase())) {
+    		result = true;
+    	}
+    	return result;
     }
 	
     @Override 
