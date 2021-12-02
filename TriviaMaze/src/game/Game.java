@@ -45,17 +45,17 @@ public class Game {
 				String moveChoice = MenuUtilities.printMoveMenu();
 				myMaze.move(moveChoice);
 			}
-			if(choice.equals("2")) {
+			else if(choice.equals("2")) {
 				//save game
 				saveGame();
 				MenuUtilities.printGameOutro();
 			}
-			if(choice.equals("3")) {
+			else if(choice.equals("3")) {
 				//quit
 				MenuUtilities.printGameOutro();
 				break;
 			}
-			if(choice.equals("4")) {
+			else if(choice.equals("4")) {
 				//cheats
 				getCheat();
 			}
