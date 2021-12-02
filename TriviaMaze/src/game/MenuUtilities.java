@@ -58,21 +58,27 @@ public class MenuUtilities{
     
     public static String isCheat() {
     	String cheat = "";
-	    System.out.println("All you need is faith trust and...");
+	    System.out.println("All you need is faith trust and ... dust");
 	    String input = myScanner.next();
-	    if(input.equals("pixieDust")) {
+	    if(input.equals("pixie")) {
 	        System.out.println("CHEAT MODE ENABLED");
 	    	input = myScanner.next();
 	    	if(input.equals("TAKEmeTOtheEND")) {
-	    		System.out.print("Hold tight while we take you there...");
+	    		System.out.print("Hold tight while we take you there...\n");
 	    	    cheat = "TAKEmeTOtheEND";
 	    	}
+	    	if(input.equals("grantHint")) {
+	    		cheat = "grantHint";
+	    	}
+	    	if(input.equals("magicCarpet")) {
+	    		cheat = "magicCarpet";
+	    	}
 	    	else {
-	    		System.out.print("EXITING CHEAT MODE...");
+	    		System.out.print("EXITING CHEAT MODE...\n");
 	    	}
 	    }
 	    else {
-    		System.out.print("EXITING CHEAT MODE...");
+    		System.out.print("EXITING CHEAT MODE...\n");
     	}
 	    return cheat;
     }
@@ -82,19 +88,39 @@ public class MenuUtilities{
     	
     	System.out.println("About:");
     	System.out.println("Disney Trivia Maze is a trivia based game that consists of disney "
-    			+ "themed questions. At the beginning of the game, the player is put at the "
-    			+ "start of the maze. The aim of the game is to make way to the end of the "
-    			+ "maze by walking through various door and rooms and answering the trivia"
-    			+ "questions. If the user is stuck in a room and is unable to answer any of "
-    			+ "the questions in the room correctly, the game is over.\n");
+    			+ "themed questions."); 
+    	System.out.println("At the beginning of the game, the player is put at the start of "
+    			+ "the maze.");
+    	System.out.println("The aim of the game is to make way to the end of the maze by "
+    			+ "walking through various door and rooms and answering the trivia questions.");
+    	System.out.println("If the user is stuck in a room and is unable to answer any of the "
+    			+ "questions in the room correctly, the game is over.");
+    	System.out.println();
     	
-    	//Add instructions...
     	System.out.println("Instructions:");
-    	System.out.println("");
+    	System.out.println("To move through the maze, simply type in the direction you would"
+    			+ "like to move in. The door associated with the direction and its question"
+    			+ "is prompted.");
+    	System.out.println("There are 4 types of questions: True/False, Multiple choice fill "
+    			+ "in the blanks and short answer.");
+    	System.out.println("For true/false questions enter either true or false.");
+    	System.out.println("For multiple choice questions, enter the correct option that is a,"
+    			+ "b,c or d.");
+    	System.out.println("For fill in the blanks and short answer type questions, simply "
+    			+ "enter your answer.");
+    	System.out.println("Once you answer the question correctly, the door is opened and "
+    			+ "you are taken to the next room.");
+    	System.out.println("In the event that a question is answered incorrectly, the door is "
+    			+ "locked permanently and the user is unable to move  through that door.");
+    	System.out.println("If you are able to make way to the last room, you win the game.");
+    	System.out.println("If you get stuck in a room, the game is over.");
+    	System.out.println("The game also has a secret cheat system!");
     }
+    
     
     public static void printGameIntro() {
     	System.out.println();
+    	System.out.println("+--------------------------------------------------------------+");
     	System.out.println("                ,n888888n,");
 	    System.out.println("               .8888888888b");
 	    System.out.println("               888888888888nd8P~''8g,");
@@ -124,6 +150,7 @@ public class MenuUtilities{
 	   	System.out.println("              `\\          )  \"-_           `|\\");
 	 	System.out.println("                \\__    __/      ~-__   __--~\\\\");
 	   	System.out.println("                   ~~\"~             ~~~\n");
+	   	System.out.println();
     }
     
     public static void printHelpMenuIntro() {
@@ -156,7 +183,8 @@ public class MenuUtilities{
 	   	System.out.println("              (           )\\\\              ))\\");
 	   	System.out.println("              `\\          )  \"-_           `|\\");
 	 	System.out.println("                \\__    __/      ~-__   __--~\\\\");
-	   	System.out.println("                   ~~\"~             ~~~\n");	
+	   	System.out.println("                   ~~\"~             ~~~\n");
+	   	System.out.println();
     }
     
     public static void printGameOutro() {
@@ -190,6 +218,8 @@ public class MenuUtilities{
 	   	System.out.println("              `\\          )  \"-_           `|\\");
 	 	System.out.println("                \\__    __/      ~-__   __--~\\\\");
 	   	System.out.println("                   ~~\"~             ~~~\n");
+	   	System.out.println();
+	   	System.out.println("+--------------------------------------------------------------+");
     }
     
     public static void printGameOver() {
@@ -223,6 +253,8 @@ public class MenuUtilities{
 	   	System.out.println("              `\\          )  \"-_           `|\\");
 	 	System.out.println("                \\__    __/      ~-__   __--~\\\\");
 	   	System.out.println("                   ~~\"~             ~~~\n");
+	   	System.out.println();
+	   	System.out.println("+--------------------------------------------------------------+");
     }
     
     public static void printGameWon() {
@@ -256,5 +288,7 @@ public class MenuUtilities{
 	   	System.out.println("              `\\          )  \"-_           `|\\");
 	 	System.out.println("                \\__    __/      ~-__   __--~\\\\");
 	   	System.out.println("                   ~~\"~             ~~~\n");
+	   	System.out.println();
+	   	System.out.println("+--------------------------------------------------------------+");
     }
 }

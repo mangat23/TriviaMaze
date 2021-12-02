@@ -26,7 +26,7 @@ public class DataBase {
 		try {
 			Connection conn = ds.getConnection();
 			Statement stmt = conn.createStatement();
-            String query = "SELECT * FROM questions where ROW_NUM =" + theRandomNum;
+            String query = "SELECT QUESTIONS FROM questions where ROW_NUM =" + theRandomNum;
             ResultSet rs = stmt.executeQuery(query);
             
             question = rs.getString( "QUESTIONS" );
@@ -43,7 +43,7 @@ public class DataBase {
         try {
         	Connection conn = ds.getConnection();
         	Statement stmt = conn.createStatement();
-            String query = "SELECT * FROM questions where ROW_NUM =" + theRandomNum;
+            String query = "SELECT ANSWER FROM questions where ROW_NUM =" + theRandomNum;
             ResultSet rs = stmt.executeQuery(query);
             
             answer = rs.getString( "ANSWER" );
@@ -77,9 +77,9 @@ public class DataBase {
     	try {
     		Connection conn = ds.getConnection();
         	Statement stmt = conn.createStatement();
-            String query = "SELECT COUNT(*) as count FROM questions";
+            String query = "SELECT COUNT(*) as total FROM questions";
             ResultSet rs = stmt.executeQuery(query);
-			count = rs.getInt( "count" );
+			count = rs.getInt( "total" );
             
 		}catch(SQLException e) {
 			e.printStackTrace();

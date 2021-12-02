@@ -9,10 +9,13 @@ public class Maze implements Serializable{
 	private User myUser;
 
 	private  Room[][] myMaze;
+	
+	private int myHintNum;
     
     public Maze() {
         myMaze = new Room[4][4];
         myUser = new User();
+        myHintNum = 0;
         myUser.setX(0);
         myUser.setY(0);
         buildRooms();
@@ -29,6 +32,7 @@ public class Maze implements Serializable{
             }
         }
         setWalls();
+        joinDoors();
     }
     
     public void setWalls() {
@@ -40,6 +44,18 @@ public class Maze implements Serializable{
     	}
     }
     
+    public void joinDoors() {
+    	for(int i = 0; i < myMaze.length; i++) {
+    		myMaze[1][i].setNorth(myMaze[0][i].getDoor("south")); 
+    		myMaze[2][i].setNorth(myMaze[1][i].getDoor("south"));
+    		myMaze[3][i].setNorth(myMaze[2][i].getDoor("south"));
+    		
+    		myMaze[i][0].setEast(myMaze[i][1].getDoor("west"));
+    		myMaze[i][1].setEast(myMaze[i][2].getDoor("west"));
+    		myMaze[i][2].setEast(myMaze[i][3].getDoor("west"));
+    	}
+    }
+    
     public void move(String theDirection) {
     	Room currentRoom = getCurrentRoom();
     	Door currentDoor = currentRoom.getDoor(theDirection);
@@ -47,6 +63,12 @@ public class Maze implements Serializable{
     			!currentDoor.getWall()) {
     		
     		System.out.println(currentDoor.getQuestion());
+    		if(myHintNum > 0) {
+    			boolean resultHint = currentDoor.getHint();
+    			if(resultHint) {
+    				myHintNum--;
+    			}
+    		}
     		boolean result = currentDoor.answerDoorQuestion();
     		
     		if(result) {
@@ -54,6 +76,7 @@ public class Maze implements Serializable{
     			currentDoor.setAnswerQuestion(true);
     			System.out.println("You got it!");
     			moveUser(theDirection);
+    			//System.out.println("User location:" + myUser.getX() +"," + myUser.getY());
     			
     		} else {
     			currentDoor.setDoorlocked(false);
@@ -97,6 +120,14 @@ public class Maze implements Serializable{
 	public void setLocation(int theX, int theY) {
 		myUser.setX(theX);
 		myUser.setY(theY);
+	}
+	
+	public int getHintNum() {
+		return myHintNum;
+	}
+	
+	public void setHintNum(int theHintNum) {
+		myHintNum = theHintNum;
 	}
 
 	public boolean isGameOver() {

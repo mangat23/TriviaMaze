@@ -74,6 +74,12 @@ public class Game {
 	     if(cheat.equals("TAKEmeTOtheEND")) {
 	    	 myMaze.setLocation(2,2);
 	     }
+	     if(cheat.equals("grantHint")) {
+	    	 myMaze.setHintNum(myMaze.getHintNum() + 1);
+	     }
+	     if(cheat.equals("magicCarpet")) {
+	    	 //myMaze.setLocation(, );
+	     }
 	  }
 	
 	public void loadGame() {

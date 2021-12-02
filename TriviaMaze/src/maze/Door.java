@@ -60,6 +60,19 @@ public class Door implements Serializable{
     	}
     	return result;
     }
+    
+    public boolean getHint() {
+    	boolean result = false;
+    	System.out.println("Would you like a hint Y/N");
+    	String input = myScan.nextLine().toLowerCase();
+    	if(input.equals("y")) {
+    		System.out.println(myQuestion.getHint());
+    		result = true;
+    	} else {
+    		System.out.println("Okie dokie!");
+    	}
+    	return result;
+    }
 	
     @Override 
     public String toString() {

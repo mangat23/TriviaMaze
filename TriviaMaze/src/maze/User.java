@@ -32,18 +32,18 @@ public class User implements Serializable{
 	}
 	
 	public void moveNorth() {
-		myY--;
+		myX--;
 	}
 	
 	public void moveSouth() {
-		myY++;
-	}
-	
-	public void moveEast() {
 		myX++;
 	}
 	
+	public void moveEast() {
+		myY++;
+	}
+	
 	public void moveWest() {
-		myX--;
+		myY--;
 	}
 }

@@ -64,34 +64,27 @@ public class Room implements Serializable{
 	public String roomStatus() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Current room:");
-		sb.append("\n");
-		sb.append("NORTH: ");
-		if(myNorth.getDoorLocked()) {
-			sb.append("OPEN");
-		}else {
-			sb.append("CLOSED");
+		Door [] doors = {myNorth, mySouth, myWest, myEast};
+		String[] doorString = {"NORTH: ", "SOUTH: ", "WEST: ", "EAST: "};
+		
+		for(int i =0; i<doors.length; i++) {
+			sb.append("\n");
+			sb.append(doorString[i]);
+			if(doors[i].getDoorLocked()) {
+				sb.append("OPEN");
+			}
+			if(!doors[i].getDoorLocked() && doors[i].getQuestionAnswered()) {
+				sb.append("CLOSED");
+			} 
+			if(doors[i].getWall()) {
+				sb.append("WALL");
+			}
+			if(!doors[i].getDoorLocked() && !doors[i].getQuestionAnswered() && 
+					!doors[i].getWall()) {
+				sb.append("AVAILABLE");
+			}
 		}
-		sb.append("\n");
-		sb.append("SOUTH: ");
-		if(mySouth.getDoorLocked()) {
-			sb.append("OPEN");
-		}else {
-			sb.append("CLOSED");
-		}
-		sb.append("\n");
-		sb.append("WEST: ");
-		if(myWest.getDoorLocked()) {
-			sb.append("OPEN");
-		}else {
-			sb.append("CLOSED");
-		}
-		sb.append("\n");
-		sb.append("EAST: ");
-		if(myEast.getDoorLocked()) {
-			sb.append("OPEN");
-		}else {
-			sb.append("CLOSED");
-		}
+		
 		sb.append("\n");
 		return sb.toString();
 	}
