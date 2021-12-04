@@ -67,14 +67,29 @@ public class Game {
 				String moveChoice = MenuUtilities.printMoveMenu();
 				myMaze.move(moveChoice);
 			}
+<<<<<<< HEAD
 			else if(choice.equals("2")) {	//save game
+=======
+			else if(choice.equals("2")) {
+				//save game
+>>>>>>> 02deeeb981a2d7d01b3dbffe01ed9225127bea1a
 				saveGame();
 			}
+<<<<<<< HEAD
 			else if(choice.equals("3")) {	//quit
 				MenuUtilities.printGameOutro();
 				break;
 			}
 			else if(choice.equals("4")) {	//cheats
+=======
+			else if(choice.equals("3")) {
+				//quit
+				MenuUtilities.printGameOutro();
+				break;
+			}
+			else if(choice.equals("4")) {
+				//cheats
+>>>>>>> 02deeeb981a2d7d01b3dbffe01ed9225127bea1a
 				getCheat();
 			}
 		}
