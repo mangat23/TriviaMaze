@@ -17,55 +17,55 @@ public class Room implements Serializable{
 		myWest = new Door();
 	}
 	
-	public Door getDoor(String theDoor) {
+	public Door getDoor(final String theDoor) {
 		Door door = null;
 		if(theDoor.equals("north")) {
 			door = myNorth;
 		}
-		if(theDoor.equals("south")) {
+		else if(theDoor.equals("south")) {
 			door = mySouth;
 		}
-		if(theDoor.equals("west")) {
+		else if(theDoor.equals("west")) {
 			door = myWest;
 		}
-		if(theDoor.equals("east")) {
+		else if(theDoor.equals("east")) {
 			door = myEast;
 		}
 		return door;
 	}
 	
-	public void setNorth(Door theNorth) {
+	public void setNorth(final Door theNorth) {
 		myNorth = theNorth;
 	}
-	public void setSouth(Door theSouth) {
+	
+	public void setSouth(final Door theSouth) {
 		mySouth = theSouth;
 	}
-	public void setEast(Door theEast) {
+	
+	public void setEast(final Door theEast) {
 		myEast = theEast;
 	}
-	public void setWest(Door theWest) {
+	
+	public void setWest(final Door theWest) {
 		myWest = theWest;
 	}
 	
 	public boolean isRoomLocked() {
-		boolean result = false;
-		if(((!myNorth.getDoorLocked() &&  myNorth.getQuestionAnswered()) || myNorth.getWall())
-			&& ((!mySouth.getDoorLocked() &&  mySouth.getQuestionAnswered()) 
-					|| mySouth.getWall()) 
-			&& ((!myWest.getDoorLocked() &&  myWest.getQuestionAnswered()) 
-					|| myWest.getWall()) 
-			&& ((!myEast.getDoorLocked()  &&  myEast.getQuestionAnswered()) 
-					|| myEast.getWall())) {
-			result = true;
-		}
-		return result;
+		return (((!myNorth.getDoorLocked() &&  myNorth.getQuestionAnswered()) 
+						|| myNorth.getWall())
+				&& ((!mySouth.getDoorLocked() &&  mySouth.getQuestionAnswered()) 
+						|| mySouth.getWall()) 
+				&& ((!myWest.getDoorLocked() &&  myWest.getQuestionAnswered()) 
+						|| myWest.getWall()) 
+				&& ((!myEast.getDoorLocked()  &&  myEast.getQuestionAnswered()) 
+						|| myEast.getWall()));
 	}
 	
 	public String roomStatus() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Current room:");
-		Door [] doors = {myNorth, mySouth, myWest, myEast};
-		String[] doorString = {"NORTH: ", "SOUTH: ", "WEST: ", "EAST: "};
+		final StringBuilder sb = new StringBuilder();
+		sb.append("\nCurrent room:");
+		final Door [] doors = {myNorth, mySouth, myWest, myEast};
+		final String[] doorString = {"NORTH: ", "SOUTH: ", "WEST: ", "EAST: "};
 		
 		for(int i =0; i<doors.length; i++) {
 			sb.append("\n");
@@ -73,13 +73,13 @@ public class Room implements Serializable{
 			if(doors[i].getDoorLocked()) {
 				sb.append("OPEN");
 			}
-			if(!doors[i].getDoorLocked() && doors[i].getQuestionAnswered()) {
+			else if(!doors[i].getDoorLocked() && doors[i].getQuestionAnswered()) {
 				sb.append("CLOSED");
 			} 
-			if(doors[i].getWall()) {
+			else if(doors[i].getWall()) {
 				sb.append("WALL");
 			}
-			if(!doors[i].getDoorLocked() && !doors[i].getQuestionAnswered() && 
+			else if(!doors[i].getDoorLocked() && !doors[i].getQuestionAnswered() && 
 					!doors[i].getWall()) {
 				sb.append("AVAILABLE");
 			}

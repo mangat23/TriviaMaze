@@ -7,16 +7,16 @@ public class Question implements Serializable{
 	
 	private static final long serialVersionUID = 2749682192896906213L;
 
-	private String myQuestion;
+	private final String myQuestion;
 	
-	private String myAnswer;
+	private final String myAnswer;
 	
-	private String myHint;
+	private final String myHint;
 	  
     public Question () {
-	    DataBase db = new DataBase();
-	    Random rand = new Random();
-    	int randomNum = rand.nextInt(db.getRowCount()) + 1;
+	    final DataBase db = new DataBase();
+	    final Random rand = new Random();
+    	final int randomNum = rand.nextInt(db.getRowCount()) + 1;
 	    myQuestion = db.getQuestion(randomNum);
 	    myAnswer = db.getAnswer(randomNum);
 	    myHint = db.getHint(randomNum);
@@ -34,8 +34,14 @@ public class Question implements Serializable{
 	    return myHint;
 	}
 	
+	public boolean checkAnswer(String theAnswer) {
+		theAnswer = theAnswer.toLowerCase();
+		return myAnswer.equals(theAnswer);
+	}
+	
+	@Override
 	public String toString() {
-	    StringBuilder sb = new StringBuilder();
+	    final StringBuilder sb = new StringBuilder();
 	    sb.append("\n" + myQuestion + "\n");
 	    return sb.toString();
     }
