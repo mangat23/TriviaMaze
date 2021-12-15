@@ -1,4 +1,10 @@
-package game;
+/*
+ * TCSS 360
+ * 
+ * Game class.
+ * TrivaMaze.
+ */
+package view;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,20 +15,35 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import maze.Maze;
+import model.Maze;
 
+/**
+ * This class runs the home menu and the in game menu. It also handles saving and loading of 
+ * the game.
+ * 
+ * @author Gurleen Grewal, Abdullah Enes
+ * @version Fall 2021
+ */
 public class Game {
 	
+	/**The maze object that is used to play the game. */
 	private Maze myMaze;
 	
+	/**Constant that resets the color. */
 	private final String ANSI_RESET = "\u001B[0m";
 
-	transient private static final String ANSI_RED = "\033[0;31m";
+	/**Constant for the color red. */
+	private static final String ANSI_RED = "\033[0;31m";
 	
-	transient private static final String ANSI_GREEN = "\u001B[32m";
+	/**Constant for the green color. */
+	private static final String ANSI_GREEN = "\u001B[32m";
 	
-	transient private static final String ANSI_BLUE = "\u001B[34m";
+	/**Constant for the blue color. */
+	private static final String ANSI_BLUE = "\u001B[34m";
 	
+	/**
+	 * Prints the intro of the game and plays the intro sound.
+	 */
 	public Game() {
 		try 
         {
@@ -35,9 +56,14 @@ public class Game {
         } catch (Exception e) {
         	e.printStackTrace();
         }
+		
 		MenuUtilities.printGameIntro();
 	}
 	
+	/**
+	 * Runs the home menu that creates a new game, loads a game, prints the help menu or quits
+	 * the game.
+	 */
 	public void run() {
     	final String homeSelection = MenuUtilities.printHomeMenu();
     	
@@ -57,24 +83,30 @@ public class Game {
     	}
 	}
 	
+	/**
+	 * Runs the in game menu till either the user quits, the game is won or lost.
+	 */
 	public void playGame() {
-		while(!myMaze.isGameOver() || myMaze.isGameWon()) {
+		boolean quit = false;
+		
+		while(myMaze.isPath() && !myMaze.isGameWon() && !quit) {
+			
 			final String choice = MenuUtilities.printMenu2();
 			
-			if(choice.equals("1")) {	//move
+			if(choice.equals("1")) {			//moves the user
 				System.out.println(ANSI_BLUE + myMaze.getCurrentRoom().roomStatus() 
 						+ ANSI_RESET);
 				String moveChoice = MenuUtilities.printMoveMenu();
 				myMaze.move(moveChoice);
 			}
-			else if(choice.equals("2")) {	//save game
+			else if(choice.equals("2")) {		//saves the game
 				saveGame();
 			}
-			else if(choice.equals("3")) {	//quit
+			else if(choice.equals("3")) {		//quits the game
 				MenuUtilities.printGameOutro();
-				break;
+				quit = true;
 			}
-			else if(choice.equals("4")) {	//cheats
+			else if(choice.equals("4")) {		//enables cheats
 				getCheat();
 			}
 		}
@@ -82,13 +114,19 @@ public class Game {
 		if(myMaze.isGameWon()) {
 			MenuUtilities.printGameWon();
 		}
-		else if(myMaze.isGameOver()) {
+		else if(!myMaze.isPath()) {
+			
 			MenuUtilities.printGameOver();
 		}
 	}
 	
+	/**
+	 * Enables cheats entered by the user.
+	 */
 	 public void getCheat() {
 	     String cheat = MenuUtilities.isCheat();
+	     
+	     //Play music when a cheat is entered correctly.
 	     if(cheat.length() > 0) {
 	    	 try 
  	        {
@@ -102,15 +140,21 @@ public class Game {
  	        	e.printStackTrace();
  	        }
 	     }
+	     
+	     //Takes user halfway through the maze.
 	     if(cheat.equals("TAKEmeTOtheEND")) {
 	    	 System.out.println(ANSI_GREEN + "Hold tight while we take you there..." 
 	    			 	+ ANSI_RESET);
 	    	 myMaze.setLocation(2,2);
 	     }
+	     
+	     //Grants a hint.
 	     else if(cheat.equals("grantHint")) {
 	    	 System.out.println(ANSI_GREEN + "Granting you a hint °o°..." + ANSI_RESET);
 	    	 myMaze.setHintNum(myMaze.getHintNum() + 1);
 	     }
+	     
+	     //Takes user to the next user and skips the question.
 	     else if(cheat.equals("magicCarpet")) {
 	    	 int [] arr = myMaze.getLocation();
 	    	 int x = arr[0];
@@ -123,11 +167,9 @@ public class Game {
 	    	 else if(x < myMaze.getMaze().length - 1) {
 	    		 myMaze.setLocation(x+1, y);
 	    	 }
-	    	 else {
-	    		 System.out.println(ANSI_GREEN + "\nLooks like you will have to answer this "
-	    		 		+ "question °o°!" + ANSI_RESET);
-	    	 }
 	     }
+	     
+	     //Display the user's position in the maze.
 	     else if(cheat.equals("display")) {
 	    	 int [] arr = myMaze.getLocation();
 	    	 int x = arr[0];
@@ -137,6 +179,9 @@ public class Game {
 	     }
 	  }
 	
+	/**
+	 * Loads a game.
+	 */
 	public void loadGame() {
         try {
             final FileInputStream file = new FileInputStream("SavedGame");
@@ -157,6 +202,9 @@ public class Game {
         }
     }
 	
+	/**
+	 * Saves a game.
+	 */
 	public void saveGame() {
 		try {
             final FileOutputStream file = new FileOutputStream("SavedGame");
