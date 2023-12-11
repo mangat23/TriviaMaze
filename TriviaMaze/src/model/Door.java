@@ -11,7 +11,7 @@ import java.io.Serializable;
 import database.Question;
 
 /**
- * This class contains a door and its related methods.
+ * This class contains an object door and its related methods.
  * 
  * @author Gurleen Grewal, Tarnveer Mangat
  * @version Fall 2021
